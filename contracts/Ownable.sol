@@ -13,9 +13,13 @@ contract Ownable {
     _;
   }
 
-  constructor() {
-    owner = msg.sender;
-    emit OwnershipTransferred(address(0), owner);
+  constructor(address _owner) {
+    owner = _owner;
+    emit OwnershipTransferred(address(0), _owner);
+  }
+
+  function queryOwner() public view returns (address){
+    return owner;
   }
 
   /// @notice Transfers ownership to `newOwner`. Either directly or claimable by the new pending owner.
@@ -39,6 +43,7 @@ contract Ownable {
       pendingOwner = newOwner;
     }
   }
+
 
   function renounceOwnership() public virtual onlyOwner {
     address newOwner = address(0);

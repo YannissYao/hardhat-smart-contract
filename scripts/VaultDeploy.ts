@@ -24,15 +24,15 @@ const create2Address = (
 
 const main = async () => {
   // 工厂合约的地址
-  const factoryAddr = '0xeB63d196bb2c15f4e06927AA2ebe243Df5dD6724';
+  const factoryAddr = '0x3C7715fBD12cf7C2B713b00a66d3e851A5E001CD';
   // 盐
-  const saltHex = ethers.utils.id('ttt');
+  const saltHex = ethers.utils.id('nnn');
   // const initCode = bytecode ;
-  const initCode = bytecode + encoder(['string','string'], ['SKS','SKS']);
+  const initCode = bytecode + encoder(['string','string','address'], ['SKS','SKS',"0x32645003Cb69DeA779c742dB07C152cEFbEaA1de"]);
   const create2Addr = create2Address(factoryAddr, saltHex, initCode);
   console.log('precomputed address:', create2Addr);
 
-  const Factory = await ethers.getContractFactory('DeterministicDeployFactory');
+  const Factory = await ethers.getContractFactory('Factory');
   const factory = Factory.attach(factoryAddr);
 
   const deploy = await factory.deploy(initCode, saltHex);
