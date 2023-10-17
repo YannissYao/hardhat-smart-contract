@@ -18,5 +18,5 @@ npx hardhat run scripts/deploy.ts
 编译：npx hardhat compile
 部署：npx hardhat run scripts/VaultDeploy.ts --network bscTestnet
 开源： npx hardhat verify --network bscTestnet 0x5767334Cb2268F5Eea3F64e164229a0c48123328 SKS  SKS 0x32645003Cb69DeA779c742dB07C152cEFbEaA1de
-测试：1.npx hardhat test --grep owner 	   2.npx hardhat test --parallel
+测试：1.npx hardhat test test/ErrorTest.ts --grep ErrorTest 	   2.npx hardhat test --parallel
 ```
