@@ -1,5 +1,6 @@
 import { ethers } from 'hardhat';
-import {bytecode} from '../artifacts/contracts/GameToken.sol/GameToken.json';
+import {bytecode} from '../artifacts/contracts/DPRegister.sol/DPRegister.json';
+import {IERC20} from '../artifacts/@openzeppelin/contracts/token/ERC20/IERC20.sol/IERC20.json';
 
 
 const encoder = (types: string[], values: any[]) => {
@@ -27,8 +28,11 @@ const main = async () => {
   const factoryAddr = '0x3C7715fBD12cf7C2B713b00a66d3e851A5E001CD';
   // 盐
   const saltHex = ethers.utils.id('nnn');
-  // const initCode = bytecode ;
-  const initCode = bytecode + encoder(['string','string'], ['SKS','SKS']);
+  ethers.getContractAt
+  //dpRegister 0xcfD28499FC7E1C32503082C6c16fe267c0A5E907
+  //erc20 0x018B5633FC0A28fACb5F41AE2C185cFf87c182e1
+  const initCode = bytecode + encoder(['address'], ['0x018B5633FC0A28fACb5F41AE2C185cFf87c182e1']) ;
+
   const create2Addr = create2Address(factoryAddr, saltHex, initCode);
   console.log('precomputed address:', create2Addr);
 

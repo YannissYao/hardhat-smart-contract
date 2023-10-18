@@ -5,10 +5,10 @@ contract ErrorTest {
 
   error Unauthorized(address unauthorizedUser);
 
-  function testThrowErr() public view returns (string memory) {
+  function testThrowErr(string memory param) public pure returns (string memory) {
     //    bool r = true;
     //    if (r) revert Unauthorized(msg.sender);
-    revert Unauthorized(msg.sender);
-    return "success";
+//    revert Unauthorized(msg.sender);
+    return param;
   }
 }
