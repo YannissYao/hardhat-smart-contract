@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-//import "@openzeppelin/contracts/access/OwnableSelf.sol";
 import "./DPStaking.sol";
 
 
@@ -45,7 +44,7 @@ contract DPRegister is DPStaking {
     _checkDpOwner(dpId);
     _;
   }
-  constructor(IERC20 stakingToken_) DPStaking(stakingToken_) {
+  constructor(address stakingToken_) DPStaking(stakingToken_) {
   }
   /**
    * This method should be called by DP Owner to register DP node

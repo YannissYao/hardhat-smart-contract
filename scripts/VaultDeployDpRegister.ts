@@ -25,13 +25,14 @@ const create2Address = (
 
 const main = async () => {
   // 工厂合约的地址
-  const factoryAddr = '0x3C7715fBD12cf7C2B713b00a66d3e851A5E001CD';
+  const factoryAddr = '0x03bE1316B6b71d16d1c345478995E55469aF1c1C';
   // 盐
-  const saltHex = ethers.utils.id('nnn');
+  const saltHex = ethers.utils.id('123qwe');
   ethers.getContractAt
-  //dpRegister 0xcfD28499FC7E1C32503082C6c16fe267c0A5E907
-  //erc20 0x018B5633FC0A28fACb5F41AE2C185cFf87c182e1
-  const initCode = bytecode + encoder(['address'], ['0x018B5633FC0A28fACb5F41AE2C185cFf87c182e1']) ;
+  //dpRegister 0x1DD40ce5dAd548b46Fc0233b4E0b329063122A49
+  //erc20 0x189F891d56caa0609BF88207536D88F9bbcd8aB3
+  //需要注入一个erc20合约地址
+  const initCode = bytecode + encoder(['address'], ['0x189F891d56caa0609BF88207536D88F9bbcd8aB3']) ;
 
   const create2Addr = create2Address(factoryAddr, saltHex, initCode);
   console.log('precomputed address:', create2Addr);
@@ -39,7 +40,7 @@ const main = async () => {
   const Factory = await ethers.getContractFactory('Factory');
   const factory = Factory.attach(factoryAddr);
 
-  const deploy = await factory.deploy(initCode, saltHex);
+  const deploy = await factory.deploy(initCode, saltHex,create2Addr);
   const txReceipt = await deploy.wait();
   console.log('Deployed to:', txReceipt.events?.[0].args?.[0]);
 };

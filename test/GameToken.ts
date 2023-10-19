@@ -15,7 +15,7 @@ describe("GameToken", function () {
 
     //部署后拿到地址方式
     //加了个参数，owner地址，用工厂来部署，这个默认是工厂的地址
-    const gameToken = await GameToken.deploy("SKS", "SKS","0x32645003Cb69DeA779c742dB07C152cEFbEaA1de");
+    const gameToken = await GameToken.deploy("SKS", "SKS");
 
     //指定合约地址方式
 //     const gameToken = GameToken.attach("0xf5b1A0F2baCF0F5F436a13713022298002C96523");

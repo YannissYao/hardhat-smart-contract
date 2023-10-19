@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable2Step.sol";
+//import "@openzeppelin/contracts/access/Ownable2Step.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeCast.sol";
-//import "@openzeppelin/contracts/access/OwnableSelf.sol";
 
 //import "@openzeppelin/contracts/utils/Context.sol";
 //import "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol";
 //import "@openzeppelin/contracts/utils/Address.sol";
 
-contract DPStaking is Ownable2Step {
+contract DPStaking is Ownable {
   using SafeERC20 for IERC20;
   IERC20 public stakingToken;
 
@@ -32,8 +32,8 @@ contract DPStaking is Ownable2Step {
 
   mapping(address => StakeInfo) public userStake;
 
-  constructor(IERC20 stakingToken_) {
-    stakingToken = stakingToken_;
+  constructor(address stakingToken_) {
+    stakingToken = IERC20(stakingToken_);
   }
 
   function stake(uint256 amount) external {
@@ -77,9 +77,8 @@ contract DPStaking is Ownable2Step {
     emit UnlockStake(staker, dpId, amount);
   }
 
-  function setStakingToken(IERC20 newStakingToken) onlyOwner external {
+  function setStakingToken(address newStakingToken) onlyOwner external {
     if (address(stakingToken) != address(0x0)) revert StakingTokenAlreadySet();
-
-    stakingToken = newStakingToken;
+    stakingToken = IERC20(newStakingToken);
   }
 }
