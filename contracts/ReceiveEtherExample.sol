@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ReceiveEtherExample is Ownable {
 
-  uint public balance;
+  uint256 public balance;
 
   constructor() {
   }
@@ -16,10 +16,22 @@ contract ReceiveEtherExample is Ownable {
     balance += msg.value;
   }
 
-
   // 查看合约的当前余额
-  function getBalance() public view returns (uint) {
+  function getBalance() public view returns (uint256) {
     return address(this).balance;
+  }
+
+  // 函数用于扣除调用者的以太币，并将其存储在合约中
+  //不同于receive的是在func中处理扣除操作。也可以作为参数传入
+  function deposit() public payable {
+    // 扣除调用者的以太币，并将它存储在合约中
+    balance += msg.value;
+  }
+
+ //也可以作为参数传入
+  function depositByParam(uint256 amount) public payable {
+    // 扣除调用者的以太币，并将它存储在合约中
+    balance += amount;
   }
 
   // 提取合约余额到指定地址（只有合约所有者可以执行）

@@ -31,11 +31,15 @@ describe("ReceiveEtherExample", function () {
     const result = await contract.getBalance();
     console.log("初始合约余额:", ethers.utils.formatUnits(result, "ether"));
     //owner向合约转账
-     const etherToSend = ethers.utils.parseEther("1"); // 1 ETH
-      await owner.sendTransaction({
-        to:    contract.address,
-        value: etherToSend,
-      });
+    const etherToSend = ethers.utils.parseEther("10"); // 1 ETH
+    //原生转账的方法
+//       await owner.sendTransaction({
+//         to:    contract.address,
+//         value: etherToSend,
+//       });
+//     await contract.deposit({ value: etherToSend });
+    await contract.depositByParam( etherToSend , { value: etherToSend });
+    console.log("执行转账 %s 以太中。。。。。", ethers.utils.formatUnits(etherToSend, "ether"));
     //转账后合约账户余额
     const result2 = await contract.getBalance();
     console.log("转账后合约账户余额:", ethers.utils.formatUnits(result2, "ether"));
