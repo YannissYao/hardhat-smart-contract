@@ -1,6 +1,6 @@
-import {loadFixture} from "@nomicfoundation/hardhat-network-helpers";
-import {expect} from "chai";
-import {ethers} from "hardhat";
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+import { expect } from "chai";
+import { ethers } from "hardhat";
 
 describe("GameToken", function () {
   // We define a fixture to reuse the same setup in every test.
@@ -18,21 +18,21 @@ describe("GameToken", function () {
     const gameToken = await GameToken.deploy("SKS", "SKS");
 
     //指定合约地址方式
-//     const gameToken = GameToken.attach("0xf5b1A0F2baCF0F5F436a13713022298002C96523");
+    //     const gameToken = GameToken.attach("0xf5b1A0F2baCF0F5F436a13713022298002C96523");
     gameToken.mint(owner.address, 9999999999);
-    return {gameToken, owner, otherAccount};
+    return { gameToken, owner, otherAccount };
   }
 
   it("balanceOf shoule ", async function () {
-    const {gameToken, owner, otherAccount} = await loadFixture(initGameToken);
+    const { gameToken, owner, otherAccount } = await loadFixture(initGameToken);
     const amount = await gameToken.balanceOf(owner.address);
     expect(amount).to.equal(9999999999);
   });
 
 
   it("owner shoule ", async function () {
-    const {gameToken, owner, otherAccount} = await loadFixture(initGameToken);
-    const realOwner = await gameToken.owner( );
+    const { gameToken, owner, otherAccount } = await loadFixture(initGameToken);
+    const realOwner = await gameToken.owner();
     expect(realOwner).to.equal(owner.address);
   });
 });

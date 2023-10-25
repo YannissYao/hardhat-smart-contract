@@ -38,7 +38,6 @@ contract DPStaking is Ownable {
 
   function stake(uint256 amount) external {
     if (amount == 0) revert IllegalArgument();
-
     address staker = msg.sender;
     uint256 balanceBefore = stakingToken.balanceOf(address(this));
     stakingToken.safeTransferFrom(staker, address(this), amount);
